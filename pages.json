@@ -2,7 +2,7 @@
 	"easycom": {
 		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
 	},
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [
 		{
 			"path": "pages/index/index",
 			"style": {
@@ -14,24 +14,28 @@
 			"style": {
 				"navigationBarTitleText": "uView-center"
 			}
-		}, {
-			"path": "pages/login/login",
+		},
+		{
+			"path": "pages/user/login",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
-
+		},
+		{
+			"path": "pages/record/index",
+			"style": {
+				"navigationBarTitleText": "记录列表"
+			}
+		},
+		{
+			"path": "pages/record/test",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
 		}
-	    ,{
-            "path" : "pages/record/record",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uView",
@@ -51,10 +55,10 @@
 				"text": "首页"
 			},
 			{
-				"pagePath": "pages/login/login",
+				"pagePath": "pages/record/index",
 				"iconPath": "static/index.png",
 				"selectedIconPath": "static/index-selected.png",
-				"text": "登录"
+				"text": "记录"
 			},
 			{
 				"pagePath": "pages/center/index",

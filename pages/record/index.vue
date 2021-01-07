@@ -1,0 +1,143 @@
+<template>
+  <view class="wrap">
+    <u-toast ref="uToast"></u-toast>
+
+    <!-- <u-button size="mini" @click="search">搜索</u-button>
+
+    <u-popup v-model="showSearch">
+      <view>出淤泥而不染，濯清涟而不妖</view>
+    </u-popup> -->
+
+    <view class="records" v-for="(item, index) in records.items" :key="index">
+      <view class="summary inline">
+        <view class="left">{{ item.date }}</view>
+        <view class="right">支出：{{ item.out }} / 收入：{{ item.in }}</view>
+      </view>
+
+      <u-swipe-action
+        :index="i"
+        v-for="(record, i) in item.records"
+        :key="record.id"
+        @click="click"
+        @open="open"
+        :options="options"
+        class="record"
+      >
+        <view class="item u-border-bottom">
+          <view class="item-wrap inline">
+            <view class="left inline">
+              <u-icon
+                name="work"
+                custom-prefix="custom-icon"
+                size="80"
+                color="#888888"
+              ></u-icon>
+              <view class="title-wrap">
+                <view class="u-font-xl">{{ record.category.name }}</view>
+                <view class="u-tips-color u-font-sm">
+                  {{ record.transaction.description }}
+                  <view v-if="record.transaction.remark">
+                    （{{ record.transaction.remark }}）
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="right">
+              {{ record.direction === "expense" ? "-" : "" }}
+              {{ record.currency_code }}
+              {{ record.currency_amount }}
+            </view>
+          </view>
+        </view>
+      </u-swipe-action>
+    </view>
+  </view>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      records: { items: [] },
+      disabled: false,
+      btnWidth: 180,
+      show: false,
+      keyword: "",
+      showSearch: false,
+      options: [
+        {
+          text: "收藏",
+          style: {
+            backgroundColor: "#007aff",
+          },
+        },
+        {
+          text: "删除",
+          style: {
+            backgroundColor: "#dd524d",
+          },
+        },
+      ],
+    };
+  },
+  async onShow() {
+    this.records = await this.getRecords();
+  },
+  onLoad() {},
+  methods: {
+    search() {
+      this.showSearch = true;
+    },
+    click(index, index1) {
+      console.log(index);
+    },
+    // 如果打开一个的时候，不需要关闭其他，则无需实现本方法
+    open(index) {
+      // 先将正在被操作的swipeAction标记为打开状态，否则由于props的特性限制，
+      // 原本为'false'，再次设置为'false'会无效
+      console.log(index);
+    },
+
+    getRecords(params) {
+      return new Promise((resolve, reject) => {
+        const params = {
+          pageSize: 100,
+          ledger_id: uni.getStorageSync("default_ledger_id"),
+        };
+        this.$u.api
+          .getRecords(params)
+          .then((res) => {
+            resolve(res);
+          })
+          .catch((e) => {
+            console.log(e);
+            resolve([]);
+          });
+      });
+    },
+  },
+};
+</script>
+
+<style lang="scss">
+.records {
+  padding-top: 10rpx;
+}
+
+.inline {
+  display: flex;
+  justify-content: space-between;
+}
+.summary {
+  padding: 15rpx 10rpx;
+  background: $u-bg-color;
+}
+.title-wrap {
+  padding-left: 15rpx;
+}
+.record {
+  .item {
+    padding: 20rpx 10rpx;
+  }
+}
+</style>
