@@ -30,7 +30,7 @@
           <view class="item-wrap inline">
             <view class="left inline">
               <u-icon
-                name="work"
+                :name="record.category.icon_name"
                 custom-prefix="custom-icon"
                 size="80"
                 color="#888888"
