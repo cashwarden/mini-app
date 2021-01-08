@@ -1,19 +1,68 @@
 <template>
-	<view>
-		
-	</view>
+  <view class="content">
+    <u-toast ref="uToast" />
+    <u-form :model="form" ref="uForm" :error-type="errorType">
+      <u-form-item prop="description">
+        <u-input
+          v-model="form.description"
+          :focus="true"
+          placeholder="请输入描述内容"
+        />
+      </u-form-item>
+    </u-form>
+    <u-button @click="submit" class="button">提交</u-button>
+  </view>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				
-			};
-		}
-	}
+export default {
+  data() {
+    return {
+      errorType: ["message"],
+      form: {
+        description: "",
+      },
+      rules: {
+        description: [
+          {
+            required: true,
+            message: "请输入描述内容",
+          },
+        ],
+      },
+    };
+  },
+  methods: {
+    submit() {
+      this.$refs.uForm.validate((valid) => {
+        console.log("验证成功");
+        console.log(this.form);
+        if (valid) {
+          this.$u.api.transactionsByDescription(this.form).then((res) => {
+            this.$refs.uToast.show({ title: "记账成功", type: "success" });
+          });
+        } else {
+          console.log("验证失败");
+        }
+      });
+    },
+  },
+  // 必须要在onReady生命周期，因为onLoad生命周期组件可能尚未创建完毕
+  onReady() {
+    this.$refs.uForm.setRules(this.rules);
+  },
+};
 </script>
 
 <style lang="scss">
-
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx;
+}
+.button {
+  margin-top: 80rpx;
+}
 </style>

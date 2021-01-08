@@ -7,6 +7,7 @@
     <u-popup v-model="showSearch">
       <view>出淤泥而不染，濯清涟而不妖</view>
     </u-popup> -->
+    <u-notice-bar mode="vertical" :list="notice"></u-notice-bar>
 
     <view class="records" v-for="(item, index) in records.items" :key="index">
       <view class="summary inline">
@@ -69,9 +70,15 @@
 </template>
 
 <script>
+import { USER_DEFAULT_LEDGER_ID } from "@/common/storage-keys";
+
 export default {
   data() {
     return {
+      notice: [
+        "点击右上角「添加到我的小程序」，使用更方便",
+        "记录左滑动可以方便删除和修改",
+      ],
       records: { items: [] },
       disabled: false,
       btnWidth: 180,
@@ -116,7 +123,7 @@ export default {
       return new Promise((resolve, reject) => {
         const params = {
           pageSize: 100,
-          ledger_id: uni.getStorageSync("default_ledger_id"),
+          ledger_id: uni.getStorageSync(USER_DEFAULT_LEDGER_ID),
         };
         this.$u.api
           .getRecords(params)
@@ -124,7 +131,6 @@ export default {
             resolve(res);
           })
           .catch((e) => {
-            console.log(e);
             resolve([]);
           });
       });

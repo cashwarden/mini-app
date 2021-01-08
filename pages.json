@@ -4,15 +4,15 @@
 	},
 	"pages": [
 		{
-			"path": "pages/index/index",
+			"path": "pages/dashboard/index",
 			"style": {
-				"navigationBarTitleText": "uView-index"
+				"navigationBarTitleText": "仪表盘"
 			}
 		},
 		{
 			"path": "pages/center/index",
 			"style": {
-				"navigationBarTitleText": "uView-center"
+				"navigationBarTitleText": ""
 			}
 		},
 		{
@@ -55,6 +55,13 @@
 				"navigationBarTitleText": "统计分析",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/account/index",
+			"style": {
+				"navigationBarTitleText": "账户列表",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	"globalStyle": {
@@ -70,7 +77,7 @@
 		"backgroundColor": "#ffffff",
 		"list": [
 			{
-				"pagePath": "pages/index/index",
+				"pagePath": "pages/dashboard/index",
 				"iconPath": "static/dashboard.png",
 				"selectedIconPath": "static/dashboard-fill.png",
 				"text": "仪表盘"
@@ -88,16 +95,16 @@
 				"text": "记账"
 			},
 			{
-				"pagePath": "pages/analysis/index",
-				"iconPath": "static/pie-chart.png",
-				"selectedIconPath": "static/pie-chart-fill.png",
-				"text": "分析"
+				"pagePath": "pages/account/index",
+				"iconPath": "static/wallet.png",
+				"selectedIconPath": "static/wallet-fill.png",
+				"text": "账户"
 			},
 			{
 				"pagePath": "pages/center/index",
-				"iconPath": "static/setting.png",
-				"selectedIconPath": "static/setting-fill.png",
-				"text": "我"
+				"iconPath": "static/compass.png",
+				"selectedIconPath": "static/compass-fill.png",
+				"text": "更多"
 			}
 		]
 	}

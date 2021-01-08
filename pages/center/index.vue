@@ -1,48 +1,87 @@
 <template>
-	<u-card :title="title" :sub-title="subTitle" :thumb="thumb">
-		<view class="" slot="body">
-			<view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
-				<view class="u-body-item-title u-line-2">瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半</view>
-				<image src="https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg" mode="aspectFill"></image>
-			</view>
-			<view class="u-body-item u-flex u-row-between u-p-b-0">
-				<view class="u-body-item-title u-line-2">釉色渲染仕女图韵味被私藏，而你嫣然的一笑如含苞待放</view>
-				<image src="https://img12.360buyimg.com/n7/jfs/t1/102191/19/9072/330688/5e0af7cfE17698872/c91c00d713bf729a.jpg" mode="aspectFill"></image>
-			</view>
-		</view>
-		<view class="" slot="foot"><u-icon name="chat-fill" size="34" color="" label="30评论"></u-icon></view>
-	</u-card>
+  <view>
+    <view class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30">
+      <view class="u-m-r-10">
+        <u-avatar :src="user.avatar" size="120"></u-avatar>
+      </view>
+      <view class="u-flex-1">
+        <view class="u-font-18 u-p-b-20">{{ user.username }}</view>
+        <view class="u-font-14 u-tips-color" v-if="user.pro">
+          Pro 会员有效期：{{ user.pro.ended_at }}
+        </view>
+        <view class="u-font-14 u-tips-color" v-if="!user.pro">
+          Free 会员有效期：永久
+        </view>
+      </view>
+      <view class="u-m-l-10 u-p-10">
+        <u-icon name="arrow-right" color="#969799" size="28"></u-icon>
+      </view>
+    </view>
+
+    <view class="u-m-t-20">
+      <u-cell-group>
+        <u-cell-item icon="rmb-circle" title="升级会员"></u-cell-item>
+      </u-cell-group>
+    </view>
+
+    <view class="u-m-t-20">
+      <u-cell-group>
+        <u-cell-item icon="star" title="账户"></u-cell-item>
+        <u-cell-item icon="photo" title="账本"></u-cell-item>
+        <u-cell-item icon="coupon" title="定时"></u-cell-item>
+        <u-cell-item icon="heart" title="规则"></u-cell-item>
+      </u-cell-group>
+    </view>
+
+    <view class="u-m-t-20">
+      <u-cell-group>
+        <u-cell-item icon="setting" title="设置"></u-cell-item>
+      </u-cell-group>
+    </view>
+  </view>
 </template>
 
 <script>
 export default {
-	data() {
-		return {
-			title: '素胚勾勒出青花，笔锋浓转淡',
-			subTitle: '2020-05-15',
-			thumb: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg',
-		};
-	}
+  data() {
+    return {
+      user: {},
+    };
+  },
+  async onShow() {
+    this.user = await this.getUserMe();
+  },
+  onLoad() {},
+  methods: {
+    getUserMe() {
+      return new Promise((resolve, reject) => {
+        this.$u.api
+          .getUserMe({ expand: "pro" })
+          .then((res) => {
+            resolve(res);
+          })
+          .catch((e) => {
+            resolve([]);
+          });
+      });
+    },
+  },
 };
 </script>
 
-<style scoped lang="scss">
-	.u-card-wrap { 
-		background-color: $u-bg-color;
-		padding: 1px;
-	}
-	
-	.u-body-item {
-		font-size: 32rpx;
-		color: #333;
-		padding: 20rpx 10rpx;
-	}
-		
-	.u-body-item image {
-		width: 120rpx;
-		flex: 0 0 120rpx;
-		height: 120rpx;
-		border-radius: 8rpx;
-		margin-left: 12rpx;
-	}
+<style lang="scss">
+page {
+  background-color: #ededed;
+}
+.camera {
+  width: 54px;
+  height: 44px;
+
+  &:active {
+    background-color: #ededed;
+  }
+}
+.user-box {
+  background-color: #fff;
+}
 </style>

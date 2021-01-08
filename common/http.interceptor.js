@@ -1,4 +1,6 @@
 import { API_URL } from '@/env'
+import { USER_TOKEN } from "@/common/storage-keys";
+
 
 // 这里的vm，就是我们在vue文件里面的this，所以我们能在这里获取vuex的变量，比如存放在里面的token变量
 const install = (Vue, vm) => {
@@ -36,7 +38,7 @@ const install = (Vue, vm) => {
 		// config.header.token = token;
 
 		if (config.url != '/login') {
-			const token = uni.getStorageSync('token');
+			const token = uni.getStorageSync(USER_TOKEN);
 			config.header.Authorization = `Bearer ${token}`;
 		}
 		return config;

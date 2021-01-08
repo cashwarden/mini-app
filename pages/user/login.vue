@@ -48,6 +48,13 @@
 </template>
 
 <script>
+import {
+  USER_INFO,
+  USER_TOKEN,
+  USER_DEFAULT_LEDGER,
+  USER_DEFAULT_LEDGER_ID,
+} from "@/common/storage-keys";
+
 export default {
   data() {
     return {
@@ -70,11 +77,14 @@ export default {
       this.$u.api
         .login({ username: this.email, password: this.password })
         .then((res) => {
-          uni.setStorage({ key: "user", data: res.user });
-          uni.setStorage({ key: "token", data: res.token });
-          uni.setStorage({ key: "default_ledger", data: res.default_ledger });
+          uni.setStorage({ key: USER_INFO, data: res.user });
+          uni.setStorage({ key: USER_TOKEN, data: res.token });
           uni.setStorage({
-            key: "default_ledger_id",
+            key: USER_DEFAULT_LEDGER,
+            data: res.default_ledger,
+          });
+          uni.setStorage({
+            key: USER_DEFAULT_LEDGER_ID,
             data: res.default_ledger.id,
           });
           this.$u.route({
