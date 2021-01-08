@@ -42,10 +42,24 @@
                 </view>
               </view>
             </view>
-            <view class="right">
+            <view
+              v-bind:class="[
+                record.direction === 'expense'
+                  ? 'u-type-error'
+                  : 'u-type-success',
+                'right',
+              ]"
+            >
               {{ record.direction === "expense" ? "-" : "" }}
               {{ record.currency_code }}
               {{ record.currency_amount }}
+
+              <u-tag
+                :text="tag"
+                mode="dark"
+                v-for="tag in record.transaction.tags"
+                :key="tag"
+              />
             </view>
           </view>
         </view>

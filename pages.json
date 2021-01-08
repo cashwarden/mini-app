@@ -34,6 +34,27 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/record/create-now",
+			"style": {
+				"navigationBarTitleText": "快速记账",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/record/create",
+			"style": {
+				"navigationBarTitleText": "经典记账",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/analysis/index",
+			"style": {
+				"navigationBarTitleText": "统计分析",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	"globalStyle": {
@@ -50,20 +71,32 @@
 		"list": [
 			{
 				"pagePath": "pages/index/index",
-				"iconPath": "static/index.png",
-				"selectedIconPath": "static/index-selected.png",
-				"text": "首页"
+				"iconPath": "static/dashboard.png",
+				"selectedIconPath": "static/dashboard-fill.png",
+				"text": "仪表盘"
 			},
 			{
 				"pagePath": "pages/record/index",
-				"iconPath": "static/index.png",
-				"selectedIconPath": "static/index-selected.png",
+				"iconPath": "static/database.png",
+				"selectedIconPath": "static/database-fill.png",
 				"text": "记录"
 			},
 			{
+				"pagePath": "pages/record/create-now",
+				"iconPath": "static/plus-circle.png",
+				"selectedIconPath": "static/plus-circle-fill.png",
+				"text": "记账"
+			},
+			{
+				"pagePath": "pages/analysis/index",
+				"iconPath": "static/pie-chart.png",
+				"selectedIconPath": "static/pie-chart-fill.png",
+				"text": "分析"
+			},
+			{
 				"pagePath": "pages/center/index",
-				"iconPath": "static/center.png",
-				"selectedIconPath": "static/center-selected.png",
+				"iconPath": "static/setting.png",
+				"selectedIconPath": "static/setting-fill.png",
 				"text": "我"
 			}
 		]
