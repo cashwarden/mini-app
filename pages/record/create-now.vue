@@ -35,14 +35,11 @@ export default {
   methods: {
     submit() {
       this.$refs.uForm.validate((valid) => {
-        console.log("验证成功");
-        console.log(this.form);
         if (valid) {
           this.$u.api.transactionsByDescription(this.form).then((res) => {
+            this.form.description = "";
             this.$refs.uToast.show({ title: "记账成功", type: "success" });
           });
-        } else {
-          console.log("验证失败");
         }
       });
     },

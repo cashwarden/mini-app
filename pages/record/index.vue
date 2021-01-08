@@ -18,8 +18,8 @@
       </view>
 
       <u-swipe-action
-        :index="i"
-        v-for="(record, i) in item.records"
+        :index="record.id"
+        v-for="record in item.records"
         :key="record.id"
         @click="click"
         @open="open"
@@ -57,8 +57,9 @@
                 {{ record.direction === "expense" ? "-" : "" }}
                 {{ record.currency_amount }}
               </view>
-              <view>
-                <u-tag
+              <view class="u-tips-color u-font-sm">
+                {{ record.account.name }}
+                <!-- <u-tag
                   :text="tag"
                   mode="dark"
                   v-for="tag in record.transaction.tags"
@@ -66,7 +67,7 @@
                   size="mini"
                   type="info"
                   class="tag"
-                />
+                /> -->
               </view>
             </view>
           </view>
@@ -94,15 +95,15 @@ export default {
       showSearch: false,
       options: [
         {
-          text: "收藏",
-          style: {
-            backgroundColor: "#007aff",
-          },
-        },
-        {
           text: "删除",
           style: {
             backgroundColor: "#dd524d",
+          },
+        },
+        {
+          text: "修改",
+          style: {
+            backgroundColor: "#007aff",
           },
         },
       ],
@@ -116,14 +117,21 @@ export default {
     search() {
       this.showSearch = true;
     },
-    click(index, index1) {
+    click(id, index) {
+      // 删除
+      if (index === 0) {
+        this.$u.api.deleteRecord(id).then((res) => {
+          this.$refs.uToast.show({ title: "删除成功", type: "success" });
+          this.getRecords();
+        });
+      }
       console.log(index);
     },
     // 如果打开一个的时候，不需要关闭其他，则无需实现本方法
     open(index) {
       // 先将正在被操作的swipeAction标记为打开状态，否则由于props的特性限制，
       // 原本为'false'，再次设置为'false'会无效
-      console.log(index);
+      // console.log(index);
     },
 
     getRecords(params) {

@@ -12,12 +12,14 @@ const install = (Vue, vm) => {
 
 	let getUserMe = (params = {}) => vm.$u.get(userMeUrl, params);
 
+	let deleteRecord = (id) => vm.$u.delete(`${recordUrl}/${id}`);
+
 	let login = (params = {}) => vm.$u.post(loginUrl, params);
 
 	let transactionsByDescription = (params = {}) => vm.$u.post(transactionsByDescriptionUrl, params);
 
 	// 将各个定义的接口名称，统一放进对象挂载到vm.$u.api(因为vm就是this，也即this.$u.api)下
-	vm.$u.api = { getRecords, login, transactionsByDescription, getUserMe };
+	vm.$u.api = { getRecords, login, transactionsByDescription, getUserMe, deleteRecord };
 }
 
 export default {
