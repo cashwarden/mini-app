@@ -48,12 +48,10 @@ const install = (Vue, vm) => {
 
 	// 响应拦截，判断状态码是否通过
 	Vue.prototype.$u.http.interceptor.response = (res) => {
-		console.log(res.code);
 		if (res.code == 0) {
 			// res为服务端返回值，可能有code，result等字段
 			// 这里对res.result进行返回，将会在this.$u.post(url).then(res => {})的then回调中的res的到
 			// 如果配置了originalData为true，请留意这里的返回值
-			console.log(res);
 			return res.data;
 		} else if (res.code == 401) {
 			// 假设201为token失效，这里跳转登录
@@ -64,6 +62,7 @@ const install = (Vue, vm) => {
 			}, 1000)
 			return false;
 		} else {
+			vm.$u.toast(res.message);
 			// 如果返回false，则会调用Promise的reject回调，
 			// 并将进入this.$u.post(url).then().catch(res=>{})的catch回调中，res为服务端的返回值
 			return false;

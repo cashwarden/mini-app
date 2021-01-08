@@ -12,7 +12,9 @@
     <view class="records" v-for="(item, index) in records.items" :key="index">
       <view class="summary inline">
         <view class="left">{{ item.date }}</view>
-        <view class="right">支出：{{ item.out }} / 收入：{{ item.in }}</view>
+        <view class="right">
+          支出 {{ item.out ? item.out : 0 }} / 收入 {{ item.in ? item.in : 0 }}
+        </view>
       </view>
 
       <u-swipe-action
@@ -48,19 +50,24 @@
                 record.direction === 'expense'
                   ? 'u-type-error'
                   : 'u-type-success',
-                'right',
+                'right u-text-right',
               ]"
             >
-              {{ record.direction === "expense" ? "-" : "" }}
-              {{ record.currency_code }}
-              {{ record.currency_amount }}
-
-              <u-tag
-                :text="tag"
-                mode="dark"
-                v-for="tag in record.transaction.tags"
-                :key="tag"
-              />
+              <view class="u-font-xl">
+                {{ record.direction === "expense" ? "-" : "" }}
+                {{ record.currency_amount }}
+              </view>
+              <view>
+                <u-tag
+                  :text="tag"
+                  mode="dark"
+                  v-for="tag in record.transaction.tags"
+                  :key="tag"
+                  size="mini"
+                  type="info"
+                  class="tag"
+                />
+              </view>
             </view>
           </view>
         </view>
@@ -149,7 +156,7 @@ export default {
   justify-content: space-between;
 }
 .summary {
-  padding: 15rpx 10rpx;
+  padding: 10rpx;
   background: $u-bg-color;
 }
 .title-wrap {
@@ -159,5 +166,8 @@ export default {
   .item {
     padding: 20rpx 10rpx;
   }
+}
+.tag {
+  margin: 0 5rpx;
 }
 </style>
