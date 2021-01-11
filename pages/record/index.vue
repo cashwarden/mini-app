@@ -107,12 +107,18 @@ export default {
           },
         },
       ],
+      params: {
+        pageSize: 100,
+        ledger_id: uni.getStorageSync(USER_DEFAULT_LEDGER_ID),
+      },
     };
   },
-  async onShow() {
-    this.records = await this.getRecords();
+  watch: {
+    params: {
+      handler: "getRecords",
+      immediate: true,
+    },
   },
-  onLoad() {},
   methods: {
     search() {
       this.showSearch = true;
@@ -122,10 +128,9 @@ export default {
       if (index === 0) {
         this.$u.api.deleteRecord(id).then((res) => {
           this.$refs.uToast.show({ title: "删除成功", type: "success" });
-          this.getRecords();
+          this.params = { ...this.params };
         });
       }
-      console.log(index);
     },
     // 如果打开一个的时候，不需要关闭其他，则无需实现本方法
     open(index) {
@@ -133,16 +138,13 @@ export default {
       // 原本为'false'，再次设置为'false'会无效
       // console.log(index);
     },
-
-    getRecords(params) {
+    getRecords(params = {}) {
       return new Promise((resolve, reject) => {
-        const params = {
-          pageSize: 100,
-          ledger_id: uni.getStorageSync(USER_DEFAULT_LEDGER_ID),
-        };
+        Object.assign(this.params, params);
         this.$u.api
-          .getRecords(params)
+          .getRecords(this.params)
           .then((res) => {
+            this.records = res;
             resolve(res);
           })
           .catch((e) => {
