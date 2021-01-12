@@ -2,6 +2,9 @@
 let recordUrl = '/records';
 let loginUrl = '/login';
 let userMeUrl = '/users/me';
+let categoriesUrl = '/categories';
+let accountsUrl = '/accounts';
+let ledgersCategoriesUrl = '/ledgers/categories';
 let transactionsByDescriptionUrl = '/transactions/by-description?expand=ledger,category,fromAccount,toAccount';
 
 // 此处第二个参数vm，就是我们在页面使用的this，你可以通过vm获取vuex等操作，更多内容详见uView对拦截器的介绍部分：
@@ -18,8 +21,22 @@ const install = (Vue, vm) => {
 
 	let transactionsByDescription = (params = {}) => vm.$u.post(transactionsByDescriptionUrl, params);
 
+	let getCategories = (params = {}) => vm.$u.get(categoriesUrl, params);
+
+	let getLedgersCategories = (params = {}) => vm.$u.get(ledgersCategoriesUrl, params);
+	let getAccounts = (params = {}) => vm.$u.get(accountsUrl, params);
+
 	// 将各个定义的接口名称，统一放进对象挂载到vm.$u.api(因为vm就是this，也即this.$u.api)下
-	vm.$u.api = { getRecords, login, transactionsByDescription, getUserMe, deleteRecord };
+	vm.$u.api = {
+		getRecords,
+		login,
+		transactionsByDescription,
+		getUserMe,
+		deleteRecord,
+		getCategories,
+		getLedgersCategories,
+		getAccounts
+	};
 }
 
 export default {
