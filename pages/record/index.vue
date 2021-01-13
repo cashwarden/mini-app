@@ -115,7 +115,7 @@ export default {
   },
   watch: {
     params: {
-      handler: "getRecords",
+      handler: "getData",
       immediate: true,
     },
   },
@@ -138,7 +138,7 @@ export default {
       // 原本为'false'，再次设置为'false'会无效
       // console.log(index);
     },
-    getRecords(params = {}) {
+    getData(params = {}) {
       return new Promise((resolve, reject) => {
         Object.assign(this.params, params);
         this.$u.api

@@ -24,7 +24,11 @@ const install = (Vue, vm) => {
 	let getCategories = (params = {}) => vm.$u.get(categoriesUrl, params);
 
 	let getLedgersCategories = (params = {}) => vm.$u.get(ledgersCategoriesUrl, params);
+
 	let getAccounts = (params = {}) => vm.$u.get(accountsUrl, params);
+	let getAccountOverview = () => vm.$u.get(`${accountsUrl}/overview`);
+	let getAccountTypes = (params = {}) => vm.$u.get(`${accountsUrl}/types`, params);
+	let deleteAccount = (id) => vm.$u.delete(`${accountsUrl}/${id}`);
 
 	// 将各个定义的接口名称，统一放进对象挂载到vm.$u.api(因为vm就是this，也即this.$u.api)下
 	vm.$u.api = {
@@ -35,7 +39,10 @@ const install = (Vue, vm) => {
 		deleteRecord,
 		getCategories,
 		getLedgersCategories,
-		getAccounts
+		getAccounts,
+		getAccountTypes,
+		getAccountOverview,
+		deleteAccount
 	};
 }
 
