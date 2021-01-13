@@ -9,7 +9,7 @@
           <view class="big-txt"> {{ accountOverview.net_asset }}</view>
         </u-col>
         <u-col span="3">
-          <u-button shape="circle" size="mini">新建</u-button>
+          <u-button shape="circle" size="mini" @click="create">新建</u-button>
         </u-col>
       </u-row>
       <u-row gutter="16">
@@ -186,6 +186,9 @@ export default {
         this.$refs.uToast.show({ title: "删除成功", type: "success" });
         this.params = { ...this.params };
       });
+    },
+    create() {
+      this.$u.route({ url: "/pages/account/create" });
     },
     // 如果打开一个的时候，不需要关闭其他，则无需实现本方法
     open(index) {

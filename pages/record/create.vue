@@ -241,7 +241,6 @@ export default {
     },
     changeDate(e) {
       this.form.date = e.result;
-      console.log(e);
     },
     confirmFromAccount(e) {
       this.from_account_name = e[0].label;

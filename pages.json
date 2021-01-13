@@ -62,6 +62,13 @@
 				"navigationBarTitleText": "账户列表",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/account/create",
+			"style": {
+				"navigationBarTitleText": "编辑账户",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	"globalStyle": {

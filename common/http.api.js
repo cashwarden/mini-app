@@ -26,6 +26,7 @@ const install = (Vue, vm) => {
 	let getLedgersCategories = (params = {}) => vm.$u.get(ledgersCategoriesUrl, params);
 
 	let getAccounts = (params = {}) => vm.$u.get(accountsUrl, params);
+	let postAccounts = (params = {}) => vm.$u.post(accountsUrl, params);
 	let getAccountOverview = () => vm.$u.get(`${accountsUrl}/overview`);
 	let getAccountTypes = (params = {}) => vm.$u.get(`${accountsUrl}/types`, params);
 	let deleteAccount = (id) => vm.$u.delete(`${accountsUrl}/${id}`);
@@ -42,7 +43,8 @@ const install = (Vue, vm) => {
 		getAccounts,
 		getAccountTypes,
 		getAccountOverview,
-		deleteAccount
+		deleteAccount,
+		postAccounts
 	};
 }
 
