@@ -164,10 +164,11 @@ export default {
   watch: {
     params: {
       handler: "getData",
-      immediate: true,
+      immediate: false,
     },
   },
   async onShow() {
+    this.params = { ...this.params };
     this.accountTypes = await this.getAccountTypes();
     this.accountOverview = await this.getAccountOverview();
   },
