@@ -6,7 +6,9 @@
       <u-row gutter="16">
         <u-col span="9">
           <view class="u-tips-color">净资产</view>
-          <view class="big-txt"> {{ accountOverview.net_asset }}</view>
+          <view class="big-txt">
+            {{ accountOverview.net_asset }}
+          </view>
         </u-col>
         <u-col span="3">
           <u-button shape="circle" size="mini" @click="create">新建</u-button>
@@ -15,7 +17,9 @@
       <u-row gutter="16">
         <u-col span="9">
           <view class="u-tips-color">总负债</view>
-          <view class="u-content-color">{{ accountOverview.liabilities }}</view>
+          <view class="u-content-color">
+            {{ accountOverview.liabilities }}
+          </view>
         </u-col>
         <u-col span="3">
           <view class="u-tips-color">总资产</view>
@@ -112,7 +116,12 @@
 export default {
   data() {
     return {
-      accountOverview: {},
+      accountOverview: {
+        net_asset: 0,
+        total_assets: 0,
+        liabilities: 0,
+        count: 0,
+      },
       accountSorts: [
         { value: "", label: "默认排序" },
         { value: "-balance_cent", label: "余额倒序" },
@@ -254,9 +263,8 @@ export default {
 
 <style lang="scss">
 .items {
-  padding: 0 20rpx;
   .item {
-    padding: 15rpx 10rpx;
+    padding: 15rpx 20rpx;
   }
 }
 
