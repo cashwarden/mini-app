@@ -79,25 +79,23 @@
             ></u-icon>
             <view class="title-wrap">
               <view class="u-font-xl">{{ item.name }}</view>
-              {{ item.remark }}
-              <!-- <view class="u-tips-color u-font-sm">
-                {{ record.transaction.description }}
-                <view v-if="record.transaction.remark">
-                  （{{ record.transaction.remark }}）
-                </view>
-              </view> -->
+              <view class="u-tips-color u-font-sm">
+                <view v-if="item.default">默认账户</view>
+                <view v-if="item.status == 'unactivated'">冻结账户</view>
+                <view v-if="item.exclude_from_stats">不计入统计</view>
+              </view>
             </view>
           </view>
-          <view>
+          <view class="u-text-right">
             <view class="u-font-xl">
               {{ item.currency_balance }}
             </view>
             <view class="u-tips-color u-font-sm">
               <u-tag
-                :text="tag"
+                :text="keyword"
                 mode="dark"
-                v-for="tag in item.tags"
-                :key="tag"
+                v-for="keyword in item.keywords"
+                :key="keyword"
                 size="mini"
                 type="info"
                 class="tag"
@@ -256,12 +254,9 @@ export default {
 
 <style lang="scss">
 .items {
-  padding: 0 10rpx;
+  padding: 0 20rpx;
   .item {
-    padding: 20rpx 10rpx;
-  }
-  .defalut {
-    color: $u-type-primary;
+    padding: 15rpx 10rpx;
   }
 }
 
