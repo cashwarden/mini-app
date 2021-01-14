@@ -25,6 +25,34 @@
         />
       </u-form-item>
 
+      <u-form-item prop="tag" label="关键词" label-width="150" class="">
+        <u-tag
+          :index="keyword"
+          v-for="keyword in form.keywords"
+          :key="keyword"
+          :text="keyword"
+          shape="circle"
+          type="info"
+          closeable
+          @close="tagClick"
+          class="tag"
+        />
+        <view class="u-flex-wrap">
+          <u-form-item class="add-tag" :border-bottom="false">
+            <u-input
+              v-model="keyword"
+              :border="false"
+              placeholder="请输入新的关键词"
+              class="input"
+              :clearable="false"
+            />
+            <u-button type="success" size="mini" @click="addTag" class="button">
+              添加
+            </u-button>
+          </u-form-item>
+        </view>
+      </u-form-item>
+
       <u-form-item prop="remark" label="备注" label-width="150">
         <u-input
           type="textarea"
@@ -78,6 +106,7 @@ export default {
       accountTypes: [],
       showAccountType: false,
       account_type_name: "一般账户",
+      keyword: "",
       form: {
         name: "",
         keywords: [],
@@ -140,6 +169,20 @@ export default {
     onReady() {
       this.$refs.uForm.setRules(this.rules);
     },
+    tagClick(e) {
+      let index = this.form.keywords.indexOf(e);
+      if (index >= 0) {
+        this.form.keywords.splice(index, 1);
+      }
+    },
+    addTag() {
+      if (this.form.keywords.indexOf(this.keyword) === -1) {
+        this.form.keywords.push(this.keyword);
+        this.keyword = "";
+      } else {
+        this.$refs.uToast.show({ title: "关键词重复", type: "warning" });
+      }
+    },
     getAccountTypes() {
       return new Promise((resolve, reject) => {
         this.$u.api
@@ -161,14 +204,17 @@ export default {
 </script>
 <style lang="scss" scoped>
 .wrap {
-  .form {
-    padding: 30rpx;
-  }
+  padding: 10rpx 30rpx;
   .swiper-item {
     color: $u-tips-color;
   }
   .active {
     color: $u-type-primary;
+  }
+  .add-tag {
+    flex-wrap: wrap;
+    .button {
+    }
   }
 }
 </style>

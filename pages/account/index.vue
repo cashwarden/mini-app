@@ -180,7 +180,6 @@ export default {
           title: "确定要删除帐户吗？",
           content: "如果帐户被删除，所有涉及的交易、规则和定时配置将永远失去。",
           success: function (res) {
-            console.log(res);
             if (res.confirm) {
               that.deleteAccount(id);
             }
@@ -264,7 +263,7 @@ export default {
 <style lang="scss">
 .items {
   .item {
-    padding: 15rpx 20rpx;
+    padding: 15rpx 30rpx;
   }
 }
 
@@ -277,7 +276,7 @@ export default {
   justify-content: space-between;
 }
 .summary {
-  padding: 10rpx 10rpx 30rpx 10rpx;
+  padding: 20rpx 10rpx 30rpx 10rpx;
   background: $u-bg-color;
 }
 .title-wrap {
