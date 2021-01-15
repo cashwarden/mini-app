@@ -25,7 +25,8 @@
 		{
 			"path": "pages/record/index",
 			"style": {
-				"navigationBarTitleText": "记录列表"
+				"navigationBarTitleText": "记录列表",
+				"enablePullDownRefresh": true	
 			}
 		},
 		{
@@ -60,7 +61,7 @@
 			"path": "pages/account/index",
 			"style": {
 				"navigationBarTitleText": "账户列表",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": true
 			}
 		},
 		{

@@ -172,6 +172,10 @@ export default {
     this.accountTypes = await this.getAccountTypes();
     this.accountOverview = await this.getAccountOverview();
   },
+  onPullDownRefresh() {
+    this.params = { ...this.params };
+    uni.startPullDownRefresh();
+  },
   methods: {
     click(id, index) {
       // 删除

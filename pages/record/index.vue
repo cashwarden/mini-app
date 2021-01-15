@@ -116,8 +116,15 @@ export default {
   watch: {
     params: {
       handler: "getData",
-      immediate: true,
+      immediate: false,
     },
+  },
+  async onShow() {
+    this.params = { ...this.params };
+  },
+  onPullDownRefresh() {
+    this.params = { ...this.params };
+    uni.startPullDownRefresh();
   },
   methods: {
     search() {
