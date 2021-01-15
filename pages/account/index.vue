@@ -3,17 +3,19 @@
     <u-toast ref="uToast"></u-toast>
 
     <view class="summary">
-      <u-row gutter="16">
-        <u-col span="9">
+      <view class="top">
+        <view class="left">
           <view class="u-tips-color">净资产</view>
           <view class="big-txt">
             {{ accountOverview.net_asset }}
           </view>
-        </u-col>
-        <u-col span="3">
-          <u-button shape="circle" size="mini" @click="create">新建</u-button>
-        </u-col>
-      </u-row>
+        </view>
+        <view class="button">
+          <u-button shape="circle" size="mini" @click="create" align="bottom">
+            新建
+          </u-button>
+        </view>
+      </view>
       <u-row gutter="16">
         <u-col span="9">
           <view class="u-tips-color">总负债</view>
@@ -265,7 +267,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .items {
   .item {
     padding: 15rpx 30rpx;
@@ -283,11 +285,34 @@ export default {
 .summary {
   padding: 20rpx 10rpx 30rpx 10rpx;
   background: $u-bg-color;
+  .top {
+    display: flex;
+    align-items: flex-end;
+    .left {
+      padding: 0px 4px;
+      margin-left: 0%;
+      flex: 0 0 75%;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: left;
+    }
+    .button {
+      padding-bottom: 20rpx;
+    }
+  }
 }
 .title-wrap {
   padding-left: 15rpx;
 }
 .tag {
   margin: 0 5rpx;
+}
+
+.bg-purple-light {
+  background: #e5e9f2;
+}
+
+.bg-purple-dark {
+  background: #99a9bf;
 }
 </style>
