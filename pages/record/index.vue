@@ -9,6 +9,24 @@
     </u-popup> -->
     <u-notice-bar mode="vertical" :list="notice"></u-notice-bar>
 
+    <view class="summary">
+      <record-create-now></record-create-now>
+    </view>
+
+    <view class="filter u-content-color">
+      <view @click="showDatePicker = true" size="mini" class="box">
+        2020-01 <u-icon name="arrow-down" size="20"></u-icon>
+      </view>
+      <view @click="showDatePicker = true" size="mini" class="box right">
+        全部账户 <u-icon name="arrow-down" size="20"></u-icon>
+      </view>
+      <view @click="showDatePicker = true" size="mini" class="box right">
+        全部类型 <u-icon name="arrow-down" size="20"></u-icon>
+      </view>
+    </view>
+
+    <u-picker v-model="showDatePicker" mode="time"></u-picker>
+
     <view class="records" v-for="(item, index) in records.items" :key="index">
       <view class="summary inline">
         <view class="left">{{ item.date }}</view>
@@ -79,10 +97,15 @@
 
 <script>
 import { USER_DEFAULT_LEDGER_ID } from "@/common/storage-keys";
+import RecordCreateNow from "@/pages/record/create-now.vue";
 
 export default {
+  components: {
+    RecordCreateNow,
+  },
   data() {
     return {
+      showDatePicker: false,
       notice: [
         "点击右上角「添加到我的小程序」，使用更方便",
         "记录左滑动可以方便删除和修改",
@@ -167,9 +190,21 @@ export default {
 
 <style lang="scss">
 .records {
-  padding-top: 10rpx;
 }
 
+.filter {
+  // background: $u-bg-color;
+  padding: 16rpx 20rpx;
+  display: flex;
+  justify-content: space-between;
+  .u-icon {
+    padding-left: 6rpx;
+    color: $u-tips-color;
+  }
+  .box {
+    padding-right: 20rpx;
+  }
+}
 .inline {
   display: flex;
   justify-content: space-between;

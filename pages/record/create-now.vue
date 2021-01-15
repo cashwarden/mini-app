@@ -3,19 +3,16 @@
     <u-toast ref="uToast" />
     <u-form :model="form" ref="uForm" :error-type="errorType">
       <u-form-item prop="description">
-        <u-input
-          v-model="form.description"
-          :focus="true"
-          placeholder="请输入描述内容"
-        />
+        <u-input v-model="form.description" placeholder="请输入描述内容" />
+        <u-button @click="submit" size="mini" class="button">提交</u-button>
       </u-form-item>
     </u-form>
-    <u-button @click="submit" class="button">提交</u-button>
   </view>
 </template>
 
 <script>
 export default {
+  name: "record-create-now",
   data() {
     return {
       errorType: ["message"],
@@ -57,9 +54,5 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40rpx;
-}
-.button {
-  margin-top: 80rpx;
 }
 </style>
