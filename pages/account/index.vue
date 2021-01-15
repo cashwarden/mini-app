@@ -170,13 +170,13 @@ export default {
     },
   },
   async onShow() {
-    this.params = { ...this.params };
+    uni.startPullDownRefresh();
     this.accountTypes = await this.getAccountTypes();
     this.accountOverview = await this.getAccountOverview();
   },
   onPullDownRefresh() {
     this.params = { ...this.params };
-    uni.startPullDownRefresh();
+    uni.stopPullDownRefresh();
   },
   methods: {
     click(id, index) {
@@ -227,10 +227,12 @@ export default {
         this.$u.api
           .getAccounts(this.params)
           .then((res) => {
+            uni.stopPullDownRefresh();
             this.items = res.items;
             resolve(res);
           })
           .catch((e) => {
+            uni.stopPullDownRefresh();
             resolve([]);
           });
       });

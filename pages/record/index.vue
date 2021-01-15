@@ -120,11 +120,11 @@ export default {
     },
   },
   async onShow() {
-    this.params = { ...this.params };
+    uni.startPullDownRefresh();
   },
   onPullDownRefresh() {
     this.params = { ...this.params };
-    uni.startPullDownRefresh();
+    uni.stopPullDownRefresh();
   },
   methods: {
     search() {
@@ -152,9 +152,11 @@ export default {
           .getRecords(this.params)
           .then((res) => {
             this.records = res;
+            uni.stopPullDownRefresh();
             resolve(res);
           })
           .catch((e) => {
+            uni.stopPullDownRefresh();
             resolve([]);
           });
       });
