@@ -1,5 +1,7 @@
 <template>
   <view class="content">
+    <m-card />
+
     暂未开发，更多请使用电脑访问：
 
     <u-link
@@ -13,7 +15,12 @@
 </template>
 
 <script>
+import { MCard } from "@/components/card.vue";
+
 export default {
+  components: {
+    MCard,
+  },
   data() {
     return {
       title: "Hello",
