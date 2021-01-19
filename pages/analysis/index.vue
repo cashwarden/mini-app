@@ -14,7 +14,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      data: [],
+    };
   },
   async onShow() {
     uni.startPullDownRefresh();

@@ -6,7 +6,8 @@
 		{
 			"path": "pages/dashboard/index",
 			"style": {
-				"navigationBarTitleText": "仪表盘"
+				"navigationBarTitleText": "仪表盘",
+				"enablePullDownRefresh": true
 			}
 		},
 		{

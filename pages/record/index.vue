@@ -204,9 +204,6 @@ export default {
 </script>
 
 <style lang="scss">
-.records {
-}
-
 .filter {
   // background: $u-bg-color;
   padding: 16rpx 20rpx;

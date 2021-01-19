@@ -1,4 +1,4 @@
-<template name="m-card">
+<template>
   <view class="summary">
     <view class="top">
       <view class="left">
@@ -28,7 +28,6 @@
 <script>
 export default {
   name: "m-card",
-  data() {},
   props: {
     main: {
       type: Object,
