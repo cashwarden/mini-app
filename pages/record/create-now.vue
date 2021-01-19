@@ -36,6 +36,7 @@ export default {
           this.$u.api.transactionsByDescription(this.form).then((res) => {
             this.form.description = "";
             this.$refs.uToast.show({ title: "记账成功", type: "success" });
+            this.$emit("refresh");
           });
         }
       });

@@ -9,4 +9,4 @@ const ENV_API_URL = {
 }
 
 // process.env.NODE_ENV
-export const API_URL = ENV_API_URL['production']; //后台接口域名
+export const API_URL = ENV_API_URL['development']; //后台接口域名

@@ -10,10 +10,10 @@
     <u-notice-bar mode="vertical" :list="notice"></u-notice-bar>
 
     <view class="summary">
-      <record-create-now></record-create-now>
+      <record-create-now v-on:refresh="onRefresh"></record-create-now>
     </view>
 
-    <view class="filter u-content-color">
+    <!-- <view class="filter u-content-color">
       <view @click="showDatePicker = true" size="mini" class="box">
         2020-01 <u-icon name="arrow-down" size="20"></u-icon>
       </view>
@@ -23,9 +23,13 @@
       <view @click="showDatePicker = true" size="mini" class="box right">
         全部类型 <u-icon name="arrow-down" size="20"></u-icon>
       </view>
-    </view>
+    </view> -->
 
-    <u-picker v-model="showDatePicker" mode="time"></u-picker>
+    <u-picker
+      v-model="showDatePicker"
+      mode="time"
+      :params="date_params"
+    ></u-picker>
 
     <view class="records" v-for="(item, index) in records.items" :key="index">
       <view class="summary inline">
@@ -115,6 +119,14 @@ export default {
       btnWidth: 180,
       show: false,
       keyword: "",
+      date_params: {
+        year: true,
+        month: true,
+        day: false,
+        hour: false,
+        minute: false,
+        second: false,
+      },
       showSearch: false,
       options: [
         {
@@ -123,12 +135,12 @@ export default {
             backgroundColor: "#dd524d",
           },
         },
-        {
-          text: "修改",
-          style: {
-            backgroundColor: "#007aff",
-          },
-        },
+        // {
+        //   text: "修改",
+        //   style: {
+        //     backgroundColor: "#007aff",
+        //   },
+        // },
       ],
       params: {
         pageSize: 100,
@@ -152,6 +164,9 @@ export default {
   methods: {
     search() {
       this.showSearch = true;
+    },
+    onRefresh() {
+      this.params = { ...this.params };
     },
     click(id, index) {
       // 删除
