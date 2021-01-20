@@ -1,16 +1,18 @@
 <template>
   <view class="content">
     <m-card
-      :main="item.main"
-      :left="item.left"
-      :right="item.right"
+      :main="item['main']"
+      :left="item['left']"
+      :right="item['right']"
       v-for="(item, index) in items"
       :key="index"
+      class="card"
     >
     </m-card>
 
-    暂未开发，更多请使用电脑访问：
+    <!-- <m-card :main="items[0]['main']"></m-card> -->
 
+    暂未开发，更多请使用电脑访问：
     <u-link
       :color="$u.color['primary']"
       href="https://cashwarden.com/"
@@ -30,20 +32,14 @@ export default {
   },
   data() {
     return {
-      items: [
-        // {
-        //   main: { name: "ss", value: "ss" },
-        //   left: { name: "支出", value: "" },
-        //   right: { name: "收入", value: "" },
-        // },
-      ],
+      items: [],
     };
   },
-  async onShow() {
+  onShow() {
     uni.startPullDownRefresh();
   },
-  onPullDownRefresh() {
-    this.items = this.getOverview();
+  async onPullDownRefresh() {
+    this.items = await this.getOverview();
     uni.stopPullDownRefresh();
   },
   methods: {
@@ -54,9 +50,10 @@ export default {
           .then((res) => {
             let items = res.map((item) => ({
               main: { name: item.text, value: item.overview.surplus },
-              left: { name: "支出", value: "" },
-              right: { name: "收入", value: "" },
+              left: { name: "支出", value: item.overview.expense },
+              right: { name: "收入", value: item.overview.income },
             }));
+            console.log(items);
             uni.stopPullDownRefresh();
             resolve(items);
           })
@@ -72,10 +69,8 @@ export default {
 
 <style lang="scss" scoped>
 .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40rpx;
+  .card {
+    margin: 10rpx 0;
+  }
 }
 </style>

@@ -277,7 +277,7 @@ export default {
 }
 
 .big-txt {
-  font-size: 60rpx;
+  font-size: 40rpx;
 }
 
 .inline {

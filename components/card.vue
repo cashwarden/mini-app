@@ -49,7 +49,10 @@ export default {
 
 <style scoped lang="scss">
 .summary {
-  padding: 20rpx 10rpx 30rpx 10rpx;
+  .big-txt {
+    font-size: 40rpx;
+  }
+  padding: 20rpx 10rpx 20rpx 10rpx;
   background: $u-bg-color;
   .top {
     display: flex;
