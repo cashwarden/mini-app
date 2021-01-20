@@ -1,16 +1,12 @@
 <template>
   <view class="content">
-    <m-card
-      :main="item['main']"
-      :left="item['left']"
-      :right="item['right']"
-      v-for="(item, index) in items"
-      :key="index"
-      class="card"
-    >
-    </m-card>
-
-    <!-- <m-card :main="items[0]['main']"></m-card> -->
+    <view class="card" v-for="(item, index) in items" :key="index">
+      <m-card
+        :main="item['main']"
+        :left="item['left']"
+        :right="item['right']"
+      />
+    </view>
 
     更多请使用电脑访问：
     <u-link
@@ -70,7 +66,7 @@ export default {
 <style lang="scss" scoped>
 .content {
   .card {
-    margin: 10rpx 0;
+    margin-bottom: 10rpx;
   }
 }
 </style>
