@@ -12,7 +12,7 @@
 
     <!-- <m-card :main="items[0]['main']"></m-card> -->
 
-    暂未开发，更多请使用电脑访问：
+    更多请使用电脑访问：
     <u-link
       :color="$u.color['primary']"
       href="https://cashwarden.com/"
