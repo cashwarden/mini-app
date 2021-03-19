@@ -10,7 +10,7 @@
         placeholder="请输入邮箱"
         :border="true"
       />
-      <view class="tips">未注册的邮箱自动创建账号</view>
+      <!-- <view class="tips">未注册的邮箱自动创建账号</view> -->
       <input
         class="u-border-bottom"
         type="password"
