@@ -154,7 +154,7 @@ export default {
       immediate: false,
     },
   },
-  async onShow() {
+  async onload() {
     uni.startPullDownRefresh();
   },
   onPullDownRefresh() {
