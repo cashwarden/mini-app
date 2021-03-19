@@ -27,7 +27,7 @@
     </view>
     <view class="buttom">
       <view class="loginType">
-        <view class="wechat item">
+        <view class="wechat item" @tap="submit('weixin')">
           <view class="icon">
             <u-icon
               size="70"
@@ -73,25 +73,34 @@ export default {
     },
   },
   methods: {
-    submit() {
-      this.$u.api
-        .login({ username: this.email, password: this.password })
-        .then((res) => {
-          uni.setStorage({ key: USER_INFO, data: res.user });
-          uni.setStorage({ key: USER_TOKEN, data: res.token });
-          uni.setStorage({
-            key: USER_DEFAULT_LEDGER,
-            data: res.default_ledger,
+    submit(type) {
+      let that = this;
+      let url = type == "weixin" ? "wechatLogin" : "login";
+      uni.login({
+        provider: "weixin",
+        success: function (loginRes) {
+          that.$u.api[url]({
+            username: that.email,
+            password: that.password,
+            code: loginRes.code,
+          }).then((res) => {
+            uni.setStorage({ key: USER_INFO, data: res.user });
+            uni.setStorage({ key: USER_TOKEN, data: res.token });
+            uni.setStorage({
+              key: USER_DEFAULT_LEDGER,
+              data: res.default_ledger,
+            });
+            uni.setStorage({
+              key: USER_DEFAULT_LEDGER_ID,
+              data: res.default_ledger.id,
+            });
+            that.$u.route({
+              url: "/pages/record/index",
+              type: "tab",
+            });
           });
-          uni.setStorage({
-            key: USER_DEFAULT_LEDGER_ID,
-            data: res.default_ledger.id,
-          });
-          this.$u.route({
-            url: "/pages/record/index",
-            type: "tab",
-          });
-        });
+        },
+      });
     },
   },
 };

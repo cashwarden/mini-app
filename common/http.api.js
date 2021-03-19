@@ -1,6 +1,7 @@
 // 如果没有通过拦截器配置域名的话，可以在这里写上完整的URL(加上域名部分)
 let recordUrl = '/records';
 let loginUrl = '/login';
+let wechatLoginUrl = '/wechat/login';
 let userMeUrl = '/users/me';
 let categoriesUrl = '/categories';
 let accountsUrl = '/accounts';
@@ -17,6 +18,7 @@ const install = (Vue, vm) => {
 	let getRecordOverview = (params) => vm.$u.get(`${recordUrl}/overview`, params);
 
 	let login = (params = {}) => vm.$u.post(loginUrl, params);
+	let wechatLogin = (params = {}) => vm.$u.post(wechatLoginUrl, params);
 
 	let transactionsByDescription = (params = {}) => vm.$u.post(transactionsByDescriptionUrl, params);
 
@@ -34,6 +36,7 @@ const install = (Vue, vm) => {
 	vm.$u.api = {
 		getRecords,
 		login,
+		wechatLogin,
 		transactionsByDescription,
 		getUserMe,
 		deleteRecord,
